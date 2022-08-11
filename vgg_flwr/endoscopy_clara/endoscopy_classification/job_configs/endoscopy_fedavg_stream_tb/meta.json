@@ -1,0 +1,23 @@
+{
+  "name": "endoscopy_fedavg_stream_tb",
+  "resource_spec": {
+    "site-1": {
+      "gpu": 0
+    },
+    "site-2": {
+      "gpu": 0
+    }
+  },
+  "deploy_map": {
+    "endoscopy_fedavg_stream_tb": [
+      "server",
+      "site-1",
+      "site-2"
+    ]
+  },
+  "min_clients": 2,
+  "mandatory_clients": [
+    "site-1",
+    "site-2"
+  ]
+}

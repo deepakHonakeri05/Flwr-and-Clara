@@ -1,0 +1,18 @@
+{
+  "name": "endoscopy_central",
+  "resource_spec": {
+    "site-1": {
+      "gpu": 1
+    }
+  },
+  "deploy_map": {
+    "endoscopy_central": [
+      "server",
+      "site-1"
+    ]
+  },
+  "min_clients": 1,
+  "mandatory_clients": [
+    "site-1"
+  ]
+}

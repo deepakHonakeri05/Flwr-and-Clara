@@ -1,0 +1,48 @@
+{
+    "format_version": 1,
+    "servers": [
+        {
+            "name": "spleen_segmentation",
+            "min_num_clients": 2,
+            "max_num_clients": 100,
+            "wait_after_min_clients": 10,
+            "heart_beat_timeout": 600,
+            "start_round": 0,
+            "num_rounds": 2
+        }
+    ],
+    "aggregator":
+      {
+        "path": "nvflare.experimental.homomorphic_encryption.he_intime_accumulate_model_aggregator.HEInTimeAccumulateWeightedAggregator"
+      },
+    "outbound_filters": [],
+    "inbound_filters": [],
+    "model_persistor":
+    {
+        "path": "nvflare.experimental.homomorphic_encryption.he_pt_file_model_persistor.HEPTFileModelPersistor",
+        "args": {
+          "exclude_vars": "dummy",
+          "model": {
+            "path": "monai.networks.nets.unet.UNet",
+            "args": {
+              "dimensions": 3,
+              "in_channels": 1,
+              "out_channels": 2,
+              "channels": [16, 32, 64, 128, 256],
+              "strides": [2, 2, 2, 2],
+              "num_res_units": 2
+            }
+          }
+        }
+    },
+    "shareable_generator": {
+      "path": "nvflare.experimental.homomorphic_encryption.he_model_shareable_generator.HEModelShareableGenerator"
+    },
+    "handlers":
+    [
+        {
+            "name": "IntimeModelSelectionHandler",
+            "args": {}
+        }
+    ]
+}

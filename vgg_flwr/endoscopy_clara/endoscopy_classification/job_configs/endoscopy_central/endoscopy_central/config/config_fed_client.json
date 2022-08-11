@@ -1,0 +1,35 @@
+{
+  "format_version": 2,
+
+  "executors": [
+    {
+      "tasks": [
+        "train", "submit_model", "validate"
+      ],
+      "executor": {
+        "id": "Executor",
+        "path": "nvflare.app_common.executors.learner_executor.LearnerExecutor",
+        "args": {
+          "learner_id": "endoscopy-learner"
+        }
+      }
+    }
+  ],
+
+  "task_result_filters": [
+  ],
+  "task_data_filters": [
+  ],
+
+  "components": [
+    {
+      "id": "endoscopy-learner",
+      "path": "pt.learners.endoscopy_learner.ENDOSCOPYLearner",
+      "args": {
+        "aggregation_epochs": 5,
+        "lr": 1e-2,
+        "central": true
+      }
+    }
+  ]
+}

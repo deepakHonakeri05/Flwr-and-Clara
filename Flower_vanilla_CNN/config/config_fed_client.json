@@ -1,0 +1,54 @@
+{
+  "format_version": 2,
+
+  "executors": [
+    {
+      "tasks": ["train", "submit_model"],
+      "executor": {
+        "path": "cifar10trainer.Cifar10Trainer",
+        "args": {
+          "lr": 0.0001,
+          "epochs": 1
+        }
+      }
+    },
+    {
+      "tasks": ["validate"],
+      "executor": {
+        "path": "cifar10validator.Cifar10Validator",
+        "args": {
+        }
+      }
+    }
+  ],
+  "task_result_filters": [
+  {
+      "tasks": ["train"],
+      "filters":[
+          {
+          "name": "HEModelEncryptor",
+          "args": {
+            "aggregation_weights": {
+              "site1":  1.0,
+              "site2":  1.0
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "task_data_filters": [
+      {
+      "tasks": ["train", "validate"],
+      "filters":[
+          {
+          "name": "HEModelDecryptor",
+          "args": {
+          }
+        }
+      ]
+    }
+  ],
+  "components": [
+  ]
+}
